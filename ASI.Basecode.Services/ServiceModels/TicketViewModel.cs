@@ -10,6 +10,7 @@ namespace ASI.Basecode.Services.ServiceModels
     {
         public int TicketId { get; set; }
         public string Subject { get; set; }
+        public string SenderEmail { get; set; }
         public DateTime CreatedTime { get; set; }
         public DateTime UpdatedTime { get; set; }
     }

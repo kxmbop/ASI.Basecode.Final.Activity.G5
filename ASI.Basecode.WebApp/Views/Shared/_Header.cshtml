@@ -6,7 +6,7 @@
              style="width: 185px;" alt="logo"
              onclick="window.location.href = '@Url.Action("Index", "Home")';">
     </div>
-    <a asp-action="Index" asp-controller="Ticket">Ticket</a>
+        <a asp-action="Index" asp-controller="Ticket">Ticket</a>
 
     <div class="logosec">
         @HttpContextAccessor.HttpContext.Session.GetString("UserName")

@@ -10,6 +10,10 @@ namespace ASI.Basecode.Data.Interfaces
 {
     public interface ITicketRepository
     {
-        IQueryable<Ticket> GetTicket();
+        IEnumerable<Ticket> ViewTickets();
+        void ViewTickets(Ticket ticket);
+        void AddTicket(Ticket ticket);
+        void DeleteTicket(Ticket ticket);
+        void UpdateTicket(Ticket ticket);
     }
 }

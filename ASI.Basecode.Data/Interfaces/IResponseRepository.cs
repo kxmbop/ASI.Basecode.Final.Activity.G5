@@ -9,6 +9,10 @@ namespace ASI.Basecode.Data.Interfaces
 {
     public interface IResponseRepository
     {
-        IQueryable<Response> GetResponse();
+        IEnumerable<Response> ViewResponses();
+        void ViewResponses(Response response);
+        void AddResponse(Response response);
+        void DeleteResponse(Response response);
+        void UpdateResponse(Response response);
     }
 }

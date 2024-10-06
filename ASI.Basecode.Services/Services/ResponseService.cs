@@ -20,20 +20,46 @@ namespace ASI.Basecode.Services.Services
             _responseRepository = responseRepository;
         }
 
-        public List<ResponseViewModel> GetResponse()
+        public (bool, IEnumerable<Response>) GetResponse()
         {
-
-            var data = _responseRepository.GetResponse().Select(s => new ResponseViewModel
+            var responses =  _responseRepository.ViewResponses();
+            if (responses != null)
+            { 
+                return (true, responses);
+            }
+            else
             {
-                ResponseId = s.ResponseId,
-                Email = s.Email,
-                Description = s.Description,
-                Attachment = s.Attachment,
-                CreatedTime = s.CreatedTime,
-                UpdatedTime = s.UpdatedTime,
+                return (false, null);
+            }
 
-            }).ToList();
-            return data;
+        }
+
+        public void AddResponse(Response response)
+        {
+            if (response == null)
+            {
+                throw new ArgumentException();
+            }
+            var newResponse = new Response();
+            newResponse.ResponseId = response.ResponseId;
+            newResponse.TicketId = response.TicketId;
+            newResponse.Description = response.Description;
+            newResponse.Attachment = response.Attachment;
+            _responseRepository.AddResponse(newResponse);
+        }
+
+        public void DeleteResponse(Response response)
+        { 
+            _responseRepository.DeleteResponse(response);
+        }
+
+        public void UpdateResponse(Response response)
+        {
+            if (response == null)
+            { 
+                throw new ArgumentException();
+            }
+            _responseRepository.UpdateResponse(response);
         }
 
     }

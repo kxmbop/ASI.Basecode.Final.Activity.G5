@@ -1,4 +1,5 @@
 ﻿using ASI.Basecode.Data.Interfaces;
+using ASI.Basecode.Data.Models;
 using ASI.Basecode.Services.Interfaces;
 using ASI.Basecode.Services.ServiceModels;
 using System;
@@ -18,18 +19,46 @@ namespace ASI.Basecode.Services.Services
             _ticketRepository = ticketRepository;
         }
 
-        public List<TicketViewModel> GetTickets()
-        {
-
-            var data = _ticketRepository.GetTicket().Select(s => new TicketViewModel
+        public (bool, IEnumerable<Ticket>) GetTicket()
+        { 
+            var tickets = _ticketRepository.ViewTickets();
+            if (tickets != null)
             {
-                TicketId = s.TicketId,
-                Subject = s.Subject,
-                CreatedTime = DateTime.Now,
-                UpdatedTime = DateTime.Now,
+                return (true, tickets);
+            }
+            else
+            {
+                return (false, null);
+            }
 
-            }).ToList();
-            return data;
         }
+
+        public void AddTicket(Ticket ticket)
+        {
+            if (ticket == null)
+            {
+                throw new ArgumentNullException();
+            }
+            var newTicket = new Ticket();
+            newTicket.TicketId = ticket.TicketId;  
+            newTicket.Subject = ticket.Subject; 
+            newTicket.SenderEmail = ticket.SenderEmail;
+            _ticketRepository.AddTicket(newTicket);
+        }
+
+        public void DeleteTicket(Ticket ticket)
+        {
+            _ticketRepository?.DeleteTicket(ticket);
+        }
+
+        public void UpdateTicket(Ticket ticket)
+        {
+            if (ticket == null)
+            {
+                throw new AccessViolationException();
+            }
+            _ticketRepository.UpdateTicket(ticket);
+        }
+
     }
 }

@@ -9,7 +9,7 @@ namespace ASI.Basecode.Services.ServiceModels
     public class ResponseViewModel
     {
         public int ResponseId { get; set; }
-        public string Email { get; set; }
+        public string TicketId { get; set; }
         public string Description { get; set; }
         public byte[] Attachment { get; set; }
         public DateTime CreatedTime { get; set; }

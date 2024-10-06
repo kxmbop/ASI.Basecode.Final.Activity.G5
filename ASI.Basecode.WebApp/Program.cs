@@ -30,6 +30,10 @@ var app = appBuilder.Build();
 
 configurer.ConfigureApp(app, app.Environment);
 
+//configurer.ConfigureApp(appBuilder, appBuilder.Environment);
+//var app = appBuilder.Build();
+
+// Map routes
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Account}/{action=Login}");
