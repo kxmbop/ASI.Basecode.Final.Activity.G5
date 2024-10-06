@@ -23,16 +23,21 @@ namespace ASI.Basecode.Data.Repositories
             return _dbContext.Tickets.ToList();
         }
 
-        public void AddTicket(Ticket ticket)
+        public int AddTicket(Ticket ticket)
         {
             _dbContext.Tickets.Add(ticket);
             _dbContext.SaveChanges();
+            return ticket.TicketId;
         }
 
-        public void DeleteTicket(Ticket ticket)
+        public void DeleteTicket(int ticketId)
         {
-            _dbContext.Remove(ticket);
-            _dbContext.SaveChanges();
+            var ticket = _dbContext.Tickets.Find(ticketId);
+            if (ticket != null)
+            {
+                _dbContext.Tickets.Remove(ticket);
+                _dbContext.SaveChanges();
+            }
         }
 
         public void UpdateTicket(Ticket ticket)
@@ -50,6 +55,11 @@ namespace ASI.Basecode.Data.Repositories
         public void ViewTickets(Ticket ticket)
         {
             throw new NotImplementedException();
+        }
+
+        public Ticket GetTicketById(int id)
+        {
+            return _dbContext.Tickets.Find(id); 
         }
     }
 }

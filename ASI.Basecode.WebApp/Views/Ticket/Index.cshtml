@@ -1,28 +1,43 @@
 ﻿@model List<ASI.Basecode.Services.ServiceModels.TicketViewModel>
 
 <h2>Tickets</h2>
+<a asp-action="NewTicket" asp-controller="Ticket" class="btn btn-outline-primary mb-4">New Ticket</a>
 
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Ticket ID</th>
-            <th>Subject</th>
-            <th>Sender Email</th>
-            <th>Created Time</th>
-            <th>Updated Time</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var ticket in Model)
-        {
-            <tr>
-                <td>@ticket.TicketId</td>
-                <td>@ticket.Subject</td>
-                <td>@ticket.SenderEmail</td>
-                <td>@ticket.CreatedTime</td>
-                <td>@ticket.UpdatedTime</td>
-            </tr>
-        }
-    </tbody>
+<div class="row">
+    @if (Model == null || !Model.Any())
+    {
+        <h4 class="card-text font-weight-bold text-center w-100">No tickets</h4>
+    }
+    else
+    {
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Ticket ID</th>
+                    <th>Subject</th>
+                    <th>Sender Email</th>
+                    <th>Created Time</th>
+                    <th>Updated Time</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var ticket in Model)
+                {
+                    <tr>
+                        <td>@ticket.TicketId</td>
+                        <td>@ticket.Subject</td>
+                        <td>@ticket.SenderEmail</td>
+                        <td>@ticket.CreatedTime</td>
+                        <td>@ticket.UpdatedTime</td>
+                        <td>
+                            <a asp-controller="Ticket" asp-action="ViewTicket" asp-route-id="@ticket.TicketId" class="btn btn-dark">View Ticket</a>
+                        </td>
 
-</table>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+</div>

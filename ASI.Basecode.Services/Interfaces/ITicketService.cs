@@ -11,8 +11,9 @@ namespace ASI.Basecode.Services.Interfaces
     public interface ITicketService
     {
         (bool, IEnumerable<Ticket>) GetTicket();
-        void AddTicket(Ticket ticket);
-        void DeleteTicket(Ticket ticket);
+        int AddTicket(Ticket ticket);
+        void DeleteTicket(int ticket);
         void UpdateTicket(Ticket ticket);
+        Ticket GetTicketById(int id);
     }
 }

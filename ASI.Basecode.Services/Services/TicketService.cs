@@ -33,22 +33,27 @@ namespace ASI.Basecode.Services.Services
 
         }
 
-        public void AddTicket(Ticket ticket)
+        public int AddTicket(Ticket ticket) 
         {
             if (ticket == null)
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException(nameof(ticket));
             }
-            var newTicket = new Ticket();
-            newTicket.TicketId = ticket.TicketId;  
-            newTicket.Subject = ticket.Subject; 
-            newTicket.SenderEmail = ticket.SenderEmail;
-            _ticketRepository.AddTicket(newTicket);
+
+            var newTicket = new Ticket
+            {
+                Subject = ticket.Subject,
+                SenderEmail = ticket.SenderEmail,
+                CreatedTime = DateTime.Now,
+                UpdatedTime = DateTime.Now
+            };
+
+            return _ticketRepository.AddTicket(newTicket);
         }
 
-        public void DeleteTicket(Ticket ticket)
+        public void DeleteTicket(int ticketId)
         {
-            _ticketRepository?.DeleteTicket(ticket);
+            _ticketRepository.DeleteTicket(ticketId);
         }
 
         public void UpdateTicket(Ticket ticket)
@@ -58,6 +63,11 @@ namespace ASI.Basecode.Services.Services
                 throw new AccessViolationException();
             }
             _ticketRepository.UpdateTicket(ticket);
+        }
+
+        public Ticket GetTicketById(int id)
+        {
+            return _ticketRepository.GetTicketById(id); 
         }
 
     }

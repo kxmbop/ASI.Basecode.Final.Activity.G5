@@ -12,8 +12,10 @@ namespace ASI.Basecode.Data.Interfaces
     {
         IEnumerable<Ticket> ViewTickets();
         void ViewTickets(Ticket ticket);
-        void AddTicket(Ticket ticket);
-        void DeleteTicket(Ticket ticket);
+        int AddTicket(Ticket ticket);
+        void DeleteTicket(int ticket);
         void UpdateTicket(Ticket ticket);
+        Ticket GetTicketById(int id);
+
     }
 }

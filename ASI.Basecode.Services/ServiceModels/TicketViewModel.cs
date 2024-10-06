@@ -13,5 +13,8 @@ namespace ASI.Basecode.Services.ServiceModels
         public string SenderEmail { get; set; }
         public DateTime CreatedTime { get; set; }
         public DateTime UpdatedTime { get; set; }
+        public string Description { get; set; }
+
+        public List<ResponseViewModel> Responses { get; set; }
     }
 }

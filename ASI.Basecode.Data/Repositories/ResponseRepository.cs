@@ -52,5 +52,10 @@ namespace ASI.Basecode.Data.Repositories
         {
             throw new NotImplementedException();
         }
+
+        public List<Response> GetResponsesByTicketId(int ticketId)
+        {
+            return _dbContext.Responses.Where(r => r.TicketId == ticketId).ToList();
+        }
     }
 }

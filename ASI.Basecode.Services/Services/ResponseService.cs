@@ -42,6 +42,7 @@ namespace ASI.Basecode.Services.Services
             }
             var newResponse = new Response();
             newResponse.ResponseId = response.ResponseId;
+            //newResponse.ResponseId = System.Guid.NewGuid().ToString();
             newResponse.TicketId = response.TicketId;
             newResponse.Description = response.Description;
             newResponse.Attachment = response.Attachment;
@@ -60,6 +61,11 @@ namespace ASI.Basecode.Services.Services
                 throw new ArgumentException();
             }
             _responseRepository.UpdateResponse(response);
+        }
+
+        public List<Response> GetResponsesByTicketId(int ticketId)
+        {
+            return _responseRepository.GetResponsesByTicketId(ticketId);
         }
 
     }
