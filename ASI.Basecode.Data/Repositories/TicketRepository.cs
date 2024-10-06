@@ -11,13 +11,45 @@ namespace ASI.Basecode.Data.Repositories
 {
     public class TicketRepository : BaseRepository, ITicketRepository
     {
-        public TicketRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {
+        //List<Ticket> _ticketList = new();
+        private readonly AsiBasecodeDBContext _dbContext;
 
-        }
-        public IQueryable<Ticket> GetTicket()
+        public TicketRepository(AsiBasecodeDBContext dBContext, UnitOfWork unitOfWork) : base(unitOfWork)
         {
-            return this.GetDbSet<Ticket>();
+            _dbContext = dBContext;
+        }
+        public IEnumerable<Ticket> ViewTickets()
+        {
+            return _dbContext.Tickets.ToList();
+        }
+
+        public void AddTicket(Ticket ticket)
+        {
+            _dbContext.Tickets.Add(ticket);
+            _dbContext.SaveChanges();
+        }
+
+        public void DeleteTicket(Ticket ticket)
+        {
+            _dbContext.Remove(ticket);
+            _dbContext.SaveChanges();
+        }
+
+        public void UpdateTicket(Ticket ticket)
+        {
+            var existingTicket = _dbContext.Tickets.FirstOrDefault(t => t.TicketId == ticket.TicketId);
+            if (existingTicket != null)
+            {
+                existingTicket.Subject = ticket.Subject;
+                existingTicket.SenderEmail = ticket.SenderEmail;
+                _dbContext.Tickets.Update(existingTicket);
+                _dbContext.SaveChanges();
+            }
+        }
+
+        public void ViewTickets(Ticket ticket)
+        {
+            throw new NotImplementedException();
         }
     }
 }

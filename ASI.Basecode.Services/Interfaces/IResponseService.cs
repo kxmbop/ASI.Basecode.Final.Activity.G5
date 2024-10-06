@@ -1,4 +1,5 @@
-﻿using ASI.Basecode.Services.ServiceModels;
+﻿using ASI.Basecode.Data.Models;
+using ASI.Basecode.Services.ServiceModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,9 @@ namespace ASI.Basecode.Services.Interfaces
 {
     public interface IResponseService
     {
-        List<ResponseViewModel> GetResponse();
+        (bool, IEnumerable<Response>) GetResponse();
+        void AddResponse(Response response);
+        void DeleteResponse(Response response); 
+        void UpdateResponse(Response response);
     }
 }

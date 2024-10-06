@@ -7,9 +7,9 @@
         <tr>
             <th>Ticket ID</th>
             <th>Subject</th>
-            <th>Date Created</th>
-            <th>Date Updated</th>
-            <th>Action</th>
+            <th>Sender Email</th>
+            <th>Created Time</th>
+            <th>Updated Time</th>
         </tr>
     </thead>
     <tbody>
@@ -18,8 +18,9 @@
             <tr>
                 <td>@ticket.TicketId</td>
                 <td>@ticket.Subject</td>
+                <td>@ticket.SenderEmail</td>
                 <td>@ticket.CreatedTime</td>
-                <td>Edit, Delete</td>
+                <td>@ticket.UpdatedTime</td>
             </tr>
         }
     </tbody>

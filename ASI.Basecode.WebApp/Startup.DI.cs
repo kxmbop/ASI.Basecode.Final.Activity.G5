@@ -8,6 +8,7 @@ using ASI.Basecode.WebApp.Authentication;
 using ASI.Basecode.WebApp.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -35,15 +36,37 @@ namespace ASI.Basecode.WebApp
             // Services
             this._services.TryAddSingleton<TokenValidationParametersFactory>();
             this._services.AddScoped<IUserService, UserService>();
-          
+            this._services.AddScoped<ITicketService, TicketService>();
+            this._services.AddScoped<IResponseService>(provider =>
+            {
+                var responseRepository = provider.GetService<IResponseRepository>();
+                return new ResponseService((ResponseRepository)responseRepository);
+            });
 
             // Repositories
             this._services.AddScoped<IUserRepository, UserRepository>();
+            this._services.AddScoped<ITicketRepository>(provider =>
+            {
+                var unitOfWork = provider.GetService<IUnitOfWork>();
+                var dbContext = provider.GetService<AsiBasecodeDBContext>();
+                return new TicketRepository(dbContext, (UnitOfWork)unitOfWork);
+            });
+            this._services.AddScoped<IResponseRepository>(provider =>
+            {
+                var unitOfWork = provider.GetService<IUnitOfWork>();
+                var dbContext = provider.GetService<AsiBasecodeDBContext>();
+                return new ResponseRepository(dbContext, (UnitOfWork)unitOfWork);
+            });
+
 
             // Manager Class
             this._services.AddScoped<SignInManager>();
 
             this._services.AddHttpClient();
+
+            //Database
+            this._services.AddDbContext<AsiBasecodeDBContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }
     }
 }
