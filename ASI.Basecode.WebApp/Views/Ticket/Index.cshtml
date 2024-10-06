@@ -1,0 +1,27 @@
+﻿@model List<ASI.Basecode.Services.ServiceModels.TicketViewModel>
+
+<h2>Tickets</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Ticket ID</th>
+            <th>Subject</th>
+            <th>Date Created</th>
+            <th>Date Updated</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var ticket in Model)
+        {
+            <tr>
+                <td>@ticket.TicketId</td>
+                <td>@ticket.Subject</td>
+                <td>@ticket.CreatedTime</td>
+                <td>Edit, Delete</td>
+            </tr>
+        }
+    </tbody>
+
+</table>
