@@ -1,0 +1,21 @@
+﻿@model ASI.Basecode.Data.Models.Role
+
+<div class="pt-5">
+
+    <h1>Create User</h1>
+
+    <form method="post" asp-action="Edit">
+        <input type="text" value="@Model.RoleId" class="form-control d-none" asp-for="RoleId">
+        <div class="form-group">
+            <label>Type of Role</label>
+            <input type="text" class="form-control" asp-for="RoleType">
+        </div>
+        <div class="form-group">
+            <label>Descrption</label>
+            <textarea class="form-control" rows="3" asp-for="Description"></textarea>
+        </div>
+        <a asp-controller="UserAccess" asp-action="Index" class="btn btn-secondary">Cancel</a>
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+
+</div>

@@ -8,6 +8,22 @@
     </div>
         <a asp-action="Index" asp-controller="Ticket">Ticket</a>
 
+    <div class="logosec hover-pointer">
+        <a asp-controller="UserAccess"
+           asp-action="Index"
+           class="btn btn-outline-primary">
+            Access Control
+        </a>
+    </div>
+
+    <div class="logosec hover-pointer">
+        <a asp-controller="Role"
+           asp-action="Index"
+           class="btn btn-outline-primary">
+            Role Management
+        </a>
+    </div>
+
     <div class="logosec">
         @HttpContextAccessor.HttpContext.Session.GetString("UserName")
         <div class="mr-20 hover-pointer" style="position: relative">
