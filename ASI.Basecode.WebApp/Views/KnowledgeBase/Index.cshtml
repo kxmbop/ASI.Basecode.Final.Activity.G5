@@ -1,0 +1,45 @@
+﻿@model List<ASI.Basecode.Services.ServiceModels.KnowledgeBaseViewModel>
+
+<h2>Knowledge Base</h2>
+<a asp-action="NewKnowledgeBase" asp-controller="KnowledgeBase" class="btn btn-outline-primary mb-4">New Knowledge Base</a>
+
+<div class="row">
+    @if (Model == null || !Model.Any())
+    {
+        <h4 class="card-text font-weight-bold text-center w-100">No Knowledge Base</h4>
+    }
+    else
+    {
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Knowledge Base ID</th>
+                    <th>Title</th>
+                    <th>Creator</th>
+                    <th>Content</th>
+                    <th>Created Time</th>
+                    <th>Updated Time</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var knowledgebase in Model)
+                {
+                    <tr>
+                        <td>@knowledgebase.KnowledgeBaseId</td>
+                        <td>@knowledgebase.Title</td>
+                        <td>@knowledgebase.Creator</td>
+                        <td>@knowledgebase.Content</td>
+                        <td>@knowledgebase.CreatedTime</td>
+                        <td>@knowledgebase.UpdatedTime</td>
+                        <td>
+                            <a asp-controller="KnowledgeBase" asp-action="ViewKnowledgeBase" asp-route-id="@knowledgebase.KnowledgeBaseId" class="btn btn-dark">View Knowledge Base</a>
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+</div>

@@ -37,6 +37,7 @@ namespace ASI.Basecode.WebApp
             this._services.TryAddSingleton<TokenValidationParametersFactory>();
             this._services.AddScoped<IUserService, UserService>();
             this._services.AddScoped<ITicketService, TicketService>();
+            this._services.AddScoped<IKnowledgeBaseService, KnowledgeBaseService>();
             this._services.AddScoped<IResponseService>(provider =>
             {
                 var responseRepository = provider.GetService<IResponseRepository>();
@@ -55,6 +56,12 @@ namespace ASI.Basecode.WebApp
                 var unitOfWork = provider.GetService<IUnitOfWork>();
                 var dbContext = provider.GetService<AsiBasecodeDBContext>();
                 return new TicketRepository(dbContext, (UnitOfWork)unitOfWork);
+            });
+            this._services.AddScoped<IKnowledgeBaseRepository>(provider =>
+            {
+                var unitOfWork = provider.GetService<IUnitOfWork>();
+                var dbContext = provider.GetService<AsiBasecodeDBContext>();
+                return new KnowledgeBaseRepository(dbContext, (UnitOfWork)unitOfWork);
             });
             this._services.AddScoped<IResponseRepository>(provider =>
             {
