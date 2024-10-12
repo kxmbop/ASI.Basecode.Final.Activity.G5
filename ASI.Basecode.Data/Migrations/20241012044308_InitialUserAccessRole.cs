@@ -5,17 +5,34 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ASI.Basecode.Data.Migrations
 {
-    public partial class Initial : Migration
+    public partial class InitialUserAccessRole : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "KnowledgeBases",
+                columns: table => new
+                {
+                    KnowledgeBaseId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Creator = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_KnowledgeBases", x => x.KnowledgeBaseId);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Responses",
                 columns: table => new
                 {
                     ResponseId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TicketId = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Attachment = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -33,7 +50,7 @@ namespace ASI.Basecode.Data.Migrations
                     TicketId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Subject = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ResponseId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SenderEmail = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedTime = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -70,6 +87,9 @@ namespace ASI.Basecode.Data.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "KnowledgeBases");
+
             migrationBuilder.DropTable(
                 name: "Responses");
 

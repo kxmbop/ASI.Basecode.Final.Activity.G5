@@ -7,6 +7,7 @@
              onclick="window.location.href = '@Url.Action("Index", "Home")';">
     </div>
         <a asp-action="Index" asp-controller="Ticket">Ticket</a>
+        <a asp-action="Index" asp-controller="KnowledgeBase">KnowledgeBase</a>
 
     <div class="logosec">
         @HttpContextAccessor.HttpContext.Session.GetString("UserName")
