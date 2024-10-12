@@ -43,7 +43,7 @@ namespace ASI.Basecode.Services.Services
             var newResponse = new Response();
             newResponse.ResponseId = response.ResponseId;
             //newResponse.ResponseId = System.Guid.NewGuid().ToString();
-            newResponse.TicketId = response.TicketId;
+            newResponse.PetId = response.PetId;
             newResponse.Description = response.Description;
             newResponse.Attachment = response.Attachment;
             _responseRepository.AddResponse(newResponse);
@@ -65,8 +65,17 @@ namespace ASI.Basecode.Services.Services
 
         public List<Response> GetResponsesByTicketId(int ticketId)
         {
-            return _responseRepository.GetResponsesByTicketId(ticketId);
+            return _responseRepository.GetResponsesByPetId(ticketId);
         }
 
+        public IEnumerable<object> GetResponsesByPetId(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        List<Response> IResponseService.GetResponsesByPetId(int petId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -6,10 +6,12 @@
              style="width: 185px;" alt="logo"
              onclick="window.location.href = '@Url.Action("Index", "Home")';">
     </div>
-        <a asp-action="Index" asp-controller="Ticket">Ticket</a>
+
+    <!-- Fixed Pet link -->
+    <a asp-controller="Pet" asp-action="Index" class="nav-link">Pet</a>
 
     <div class="logosec">
-        @HttpContextAccessor.HttpContext.Session.GetString("UserName")
+        @HttpContextAccessor.HttpContext.Session.GetString("PetBreed")
         <div class="mr-20 hover-pointer" style="position: relative">
             <div class="dp">
                 <img src="~/img/profile-logo.png"

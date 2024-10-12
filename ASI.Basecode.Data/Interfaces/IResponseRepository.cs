@@ -14,6 +14,6 @@ namespace ASI.Basecode.Data.Interfaces
         void AddResponse(Response response);
         void DeleteResponse(Response response);
         void UpdateResponse(Response response);
-        List<Response> GetResponsesByTicketId(int ticketId);
+        List<Response> GetResponsesByPetId(int petId);
     }
 }

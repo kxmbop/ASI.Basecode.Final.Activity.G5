@@ -36,7 +36,7 @@ namespace ASI.Basecode.WebApp
             // Services
             this._services.TryAddSingleton<TokenValidationParametersFactory>();
             this._services.AddScoped<IUserService, UserService>();
-            this._services.AddScoped<ITicketService, TicketService>();
+            this._services.AddScoped<IPetService, PetService>();
             this._services.AddScoped<IResponseService>(provider =>
             {
                 var responseRepository = provider.GetService<IResponseRepository>();
@@ -45,11 +45,11 @@ namespace ASI.Basecode.WebApp
 
             // Repositories
             this._services.AddScoped<IUserRepository, UserRepository>();
-            this._services.AddScoped<ITicketRepository>(provider =>
+            this._services.AddScoped<IPetRepository>(provider =>
             {
                 var unitOfWork = provider.GetService<IUnitOfWork>();
                 var dbContext = provider.GetService<AsiBasecodeDBContext>();
-                return new TicketRepository(dbContext, (UnitOfWork)unitOfWork);
+                return new PetRepository(dbContext, (UnitOfWork)unitOfWork);
             });
             this._services.AddScoped<IResponseRepository>(provider =>
             {
