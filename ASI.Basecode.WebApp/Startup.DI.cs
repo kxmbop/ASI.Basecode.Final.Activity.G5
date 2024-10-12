@@ -42,6 +42,7 @@ namespace ASI.Basecode.WebApp
                 var responseRepository = provider.GetService<IResponseRepository>();
                 return new ResponseService((ResponseRepository)responseRepository);
             });
+            this._services.AddScoped<IUserMService, UserMService>();
 
             // Repositories
             this._services.AddScoped<IUserRepository, UserRepository>();
@@ -57,6 +58,7 @@ namespace ASI.Basecode.WebApp
                 var dbContext = provider.GetService<AsiBasecodeDBContext>();
                 return new ResponseRepository(dbContext, (UnitOfWork)unitOfWork);
             });
+            this._services.AddScoped<IUserMRepository, UserMRepository>();
 
 
             // Manager Class
