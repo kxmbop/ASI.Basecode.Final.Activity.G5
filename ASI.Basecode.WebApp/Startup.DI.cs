@@ -40,7 +40,8 @@ namespace ASI.Basecode.WebApp
             this._services.AddScoped<IResponseService>(provider =>
             {
                 var responseRepository = provider.GetService<IResponseRepository>();
-                return new ResponseService((ResponseRepository)responseRepository);
+                var ticketRepository = provider.GetService<ITicketRepository>();
+                return new ResponseService((ResponseRepository)responseRepository, (TicketRepository)ticketRepository);
             });
 
             // Repositories

@@ -14,6 +14,9 @@ namespace ASI.Basecode.Data.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int TicketId { get; set; }
         public string Subject { get; set; }
+        public string Category { get; set; }
+        public string Priority { get; set; }
+        public string Status { get; set; }
         public string SenderEmail { get; set; }
         public DateTime CreatedTime { get; set; }
         public DateTime UpdatedTime { get; set; }
