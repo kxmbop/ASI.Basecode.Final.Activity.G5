@@ -43,9 +43,13 @@ namespace ASI.Basecode.WebApp
                 var ticketRepository = provider.GetService<ITicketRepository>();
                 return new ResponseService((ResponseRepository)responseRepository, (TicketRepository)ticketRepository);
             });
+            this._services.AddScoped<IRoleService, RoleService>();
+            this._services.AddScoped<IUserAccessService, UserAccessService>();
 
             // Repositories
             this._services.AddScoped<IUserRepository, UserRepository>();
+            this._services.AddScoped<IRoleRepository, RoleRepository>();
+            this._services.AddScoped<IUserAccessRepository, UserAccessRepository>();
             this._services.AddScoped<ITicketRepository>(provider =>
             {
                 var unitOfWork = provider.GetService<IUnitOfWork>();
