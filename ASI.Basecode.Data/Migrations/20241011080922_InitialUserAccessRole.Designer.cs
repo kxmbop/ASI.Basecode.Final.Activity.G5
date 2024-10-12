@@ -12,12 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ASI.Basecode.Data.Migrations
 {
     [DbContext(typeof(AsiBasecodeDBContext))]
-<<<<<<<< HEAD:ASI.Basecode.Data/Migrations/20241012194126_Initial.Designer.cs
-    [Migration("20241012194126_Initial")]
-========
-    [Migration("20241012054958_Initial")]
->>>>>>>> 89387afed3219f92ab731ac777255bde340d1795:ASI.Basecode.Data/Migrations/20241012054958_Initial.Designer.cs
-    partial class Initial
+    [Migration("20241011080922_InitialUserAccessRole")]
+    partial class InitialUserAccessRole
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,31 +23,6 @@ namespace ASI.Basecode.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("ASI.Basecode.Data.Models.Pet", b =>
-                {
-                    b.Property<int>("PetId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PetId"), 1L, 1);
-
-                    b.Property<DateTime>("CreatedTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("PetBreed")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PetName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("UpdatedTime")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("PetId");
-
-                    b.ToTable("Pets");
-                });
 
             modelBuilder.Entity("ASI.Basecode.Data.Models.Response", b =>
                 {
@@ -70,19 +41,6 @@ namespace ASI.Basecode.Data.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-<<<<<<<< HEAD:ASI.Basecode.Data/Migrations/20241012194126_Initial.Designer.cs
-                    b.Property<string>("PetBreed")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PetId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("PetName")
-========
-                    b.Property<string>("Sender")
->>>>>>>> 89387afed3219f92ab731ac777255bde340d1795:ASI.Basecode.Data/Migrations/20241012054958_Initial.Designer.cs
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("TicketId")
                         .HasColumnType("int");
 
@@ -94,8 +52,33 @@ namespace ASI.Basecode.Data.Migrations
                     b.ToTable("Responses");
                 });
 
-<<<<<<<< HEAD:ASI.Basecode.Data/Migrations/20241012194126_Initial.Designer.cs
-========
+            modelBuilder.Entity("ASI.Basecode.Data.Models.Role", b =>
+                {
+                    b.Property<int>("RoleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoleId"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RoleType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("RoleId");
+
+                    b.ToTable("Roles");
+                });
+
             modelBuilder.Entity("ASI.Basecode.Data.Models.Ticket", b =>
                 {
                     b.Property<int>("TicketId")
@@ -104,19 +87,10 @@ namespace ASI.Basecode.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TicketId"), 1L, 1);
 
-                    b.Property<string>("Category")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Priority")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("SenderEmail")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Status")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Subject")
@@ -130,7 +104,6 @@ namespace ASI.Basecode.Data.Migrations
                     b.ToTable("Tickets");
                 });
 
->>>>>>>> 89387afed3219f92ab731ac777255bde340d1795:ASI.Basecode.Data/Migrations/20241012054958_Initial.Designer.cs
             modelBuilder.Entity("ASI.Basecode.Data.Models.User", b =>
                 {
                     b.Property<int>("Id")
@@ -181,6 +154,53 @@ namespace ASI.Basecode.Data.Migrations
                         .IsUnique();
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("ASI.Basecode.Data.Models.UserAccess", b =>
+                {
+                    b.Property<int>("UserAcID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserAcID"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("UserAcID");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("Access");
+                });
+
+            modelBuilder.Entity("ASI.Basecode.Data.Models.UserAccess", b =>
+                {
+                    b.HasOne("ASI.Basecode.Data.Models.Role", "Role")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Role");
                 });
 #pragma warning restore 612, 618
         }

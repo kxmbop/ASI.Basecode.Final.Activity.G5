@@ -6,20 +6,19 @@ using System.Threading.Tasks;
 
 namespace ASI.Basecode.Services.ServiceModels
 {
-    public class ResponseViewModel
+    public class TicketViewModel
     {
-        public int ResponseId { get; set; }
-<<<<<<< HEAD
-        public int PetId { get; set; }
-        public string PetBreed { get; set; }
-        public string PetName { get; set; }
-=======
         public int TicketId { get; set; }
-        public string Sender { get; set; }
->>>>>>> 89387afed3219f92ab731ac777255bde340d1795
+        public string Subject { get; set; }
+        public string SenderEmail { get; set; }
         public string Description { get; set; }
-        public byte[] Attachment { get; set; }
+        public string Category {  get; set; }
+        public string Priority { get; set; }
+        public string Status { get; set; }
         public DateTime CreatedTime { get; set; }
         public DateTime UpdatedTime { get; set; }
+
+        public List<ResponseViewModel> Responses { get; set; }
+        public string Sender { get; set; }
     }
 }

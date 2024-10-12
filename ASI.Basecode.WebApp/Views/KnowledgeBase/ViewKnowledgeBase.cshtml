@@ -1,0 +1,27 @@
+﻿@model ASI.Basecode.Services.ServiceModels.KnowledgeBaseViewModel
+@using static ASI.Basecode.Resources.Views.Screen
+
+<div class="container pt-5">
+    <h2>Knowledge Base Details</h2>
+    <form asp-action="ViewKnowledgeBase" method="get">
+        <div>
+            <label>Title: </label>
+            <strong>@Model.Title</strong>
+        </div>
+        <div>
+            <label>Creator: </label>
+            <strong>@Model.Creator</strong>
+        </div>
+        <div>
+            <label>Content: </label>
+            <strong>@Model.Content</strong>
+        </div>
+        
+    </form>
+
+    <form asp-action="DeleteKnowledgeBase" method="post" class="mt-4">
+        <input type="hidden" name="knowledgebaseId" value="@Model.KnowledgeBaseId" />
+        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this knowledge base?');">Delete Knowledge Base</button>
+        <a asp-action="UpdateKnowledgeBase" asp-route-id="@Model.KnowledgeBaseId" class="btn btn-info">Edit</a>
+    </form>
+</div>

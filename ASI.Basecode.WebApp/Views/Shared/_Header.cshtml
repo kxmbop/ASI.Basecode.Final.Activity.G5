@@ -6,9 +6,30 @@
              style="width: 185px;" alt="logo"
              onclick="window.location.href = '@Url.Action("Index", "Home")';">
     </div>
+<<<<<<< HEAD
 
     <!-- Fixed Pet link -->
     <a asp-controller="Pet" asp-action="Index" class="nav-link">Pet</a>
+=======
+        <a asp-action="Index" asp-controller="Ticket">Ticket</a>
+        <a asp-action="Index" asp-controller="KnowledgeBase">KnowledgeBase</a>
+
+    <div class="logosec hover-pointer">
+        <a asp-controller="UserAccess"
+           asp-action="Index"
+           class="btn btn-outline-primary">
+            Access Control
+        </a>
+    </div>
+
+    <div class="logosec hover-pointer">
+        <a asp-controller="Role"
+           asp-action="Index"
+           class="btn btn-outline-primary">
+            Role Management
+        </a>
+    </div>
+>>>>>>> 89387afed3219f92ab731ac777255bde340d1795
 
     <div class="logosec">
         @HttpContextAccessor.HttpContext.Session.GetString("PetBreed")

@@ -1,0 +1,57 @@
+﻿@model ASI.Basecode.Services.ServiceModels.TicketViewModel
+@using static ASI.Basecode.Resources.Views.Screen
+
+<div class="container pt-5">
+    <h2>New Ticket</h2>
+
+    <form method="post" asp-action="NewTicket">
+        <div class="form-group">
+            <label>Subject</label>
+            <input asp-for="Subject" class="form-control" placeholder="Subject here" />
+            <span asp-validation-for="Subject" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label>Customer Email</label>
+            <input asp-for="SenderEmail" class="form-control" placeholder="Email here" />
+            <span asp-validation-for="SenderEmail" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label for="Category">Category:</label>
+            <select id="Category" name="Category" class="form-control" required>
+                <option value="">Select a category</option>
+                <option value="Hardware Issue">Hardware Issue</option>
+                <option value="Software Issue">Software Issue</option>
+                <option value="Network Issue">Network Issue</option>
+                <option value="Account Issue">Account Issue</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="Priority">Priority:</label>
+            <select id="Priority" name="Priority" class="form-control" required>
+                <option value="">Select a priority</option>
+                <option value="P1">P1 (Critical)</option>
+                <option value="P2">P2 (High)</option>
+                <option value="P3">P3 (Medium)</option>
+                <option value="P4">P4 (Low)</option>
+                <option value="P5">P5 (Very Low)</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Description</label>
+            <input asp-for="Description" class="form-control" placeholder="Description here" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div class="mt-4">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Submit Ticket
+            </button>
+            <div class="dropdown-menu">
+                <button type="submit" name="Status" value="Open" class="dropdown-item">Open</button>
+                <button type="submit" name="Status" value="In Progress" class="dropdown-item">In Progress</button>
+                <button type="submit" name="Status" value="Resolved" class="dropdown-item">Resolved</button>
+                <button type="submit" name="Status" value="Closed" class="dropdown-item">Closed</button>
+            </div>
+        </div>
+    </form>
+</div>

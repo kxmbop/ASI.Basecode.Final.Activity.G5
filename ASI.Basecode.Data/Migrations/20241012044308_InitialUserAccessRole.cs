@@ -5,24 +5,25 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ASI.Basecode.Data.Migrations
 {
-    public partial class Initial : Migration
+    public partial class InitialUserAccessRole : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Pets",
+                name: "KnowledgeBases",
                 columns: table => new
                 {
-                    PetId = table.Column<int>(type: "int", nullable: false)
+                    KnowledgeBaseId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    PetBreed = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PetName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Creator = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedTime = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Pets", x => x.PetId);
+                    table.PrimaryKey("PK_KnowledgeBases", x => x.KnowledgeBaseId);
                 });
 
             migrationBuilder.CreateTable(
@@ -31,14 +32,7 @@ namespace ASI.Basecode.Data.Migrations
                 {
                     ResponseId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-<<<<<<<< HEAD:ASI.Basecode.Data/Migrations/20241012194126_Initial.cs
-                    PetId = table.Column<int>(type: "int", nullable: false),
-                    PetBreed = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PetName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-========
                     TicketId = table.Column<int>(type: "int", nullable: false),
-                    Sender = table.Column<string>(type: "nvarchar(max)", nullable: true),
->>>>>>>> 89387afed3219f92ab731ac777255bde340d1795:ASI.Basecode.Data/Migrations/20241012054958_Initial.cs
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Attachment = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -50,17 +44,12 @@ namespace ASI.Basecode.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-<<<<<<<< HEAD:ASI.Basecode.Data/Migrations/20241012194126_Initial.cs
-========
                 name: "Tickets",
                 columns: table => new
                 {
                     TicketId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Subject = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Category = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Priority = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SenderEmail = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedTime = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -71,7 +60,6 @@ namespace ASI.Basecode.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
->>>>>>>> 89387afed3219f92ab731ac777255bde340d1795:ASI.Basecode.Data/Migrations/20241012054958_Initial.cs
                 name: "Users",
                 columns: table => new
                 {
@@ -100,10 +88,13 @@ namespace ASI.Basecode.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Pets");
+                name: "KnowledgeBases");
 
             migrationBuilder.DropTable(
                 name: "Responses");
+
+            migrationBuilder.DropTable(
+                name: "Tickets");
 
             migrationBuilder.DropTable(
                 name: "Users");

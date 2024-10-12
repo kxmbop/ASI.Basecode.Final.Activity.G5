@@ -14,10 +14,12 @@ namespace ASI.Basecode.Services.Services
     public class ResponseService : IResponseService
     {
         private readonly IResponseRepository _responseRepository;
+        private readonly ITicketRepository _ticketRepository;
 
-        public ResponseService(ResponseRepository responseRepository)
+        public ResponseService(ResponseRepository responseRepository, ITicketRepository ticketRepository)
         {
             _responseRepository = responseRepository;
+            _ticketRepository = ticketRepository;
         }
 
         public (bool, IEnumerable<Response>) GetResponse()
@@ -38,15 +40,34 @@ namespace ASI.Basecode.Services.Services
         {
             if (response == null)
             {
-                throw new ArgumentException();
+                throw new ArgumentNullException(nameof(response), "Response cannot be null");
             }
+
             var newResponse = new Response();
             newResponse.ResponseId = response.ResponseId;
+<<<<<<< HEAD
             //newResponse.ResponseId = System.Guid.NewGuid().ToString();
             newResponse.PetId = response.PetId;
+=======
+            newResponse.TicketId = response.TicketId;
+            newResponse.Sender = response.Sender;
+>>>>>>> 89387afed3219f92ab731ac777255bde340d1795
             newResponse.Description = response.Description;
             newResponse.Attachment = response.Attachment;
+            newResponse.CreatedTime = DateTime.Now;
+
             _responseRepository.AddResponse(newResponse);
+
+            var ticket = _ticketRepository.GetTicketById(response.TicketId);
+            if (ticket == null)
+            {
+                throw new Exception($"Ticket with ID {response.TicketId} not found.");
+            }
+            else
+            {
+                ticket.UpdatedTime = DateTime.Now;
+                _ticketRepository.UpdateTicket(ticket);
+            }
         }
 
         public void DeleteResponse(Response response)
