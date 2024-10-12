@@ -44,6 +44,9 @@ namespace ASI.Basecode.Services.Services
             {
                 Subject = ticket.Subject,
                 SenderEmail = ticket.SenderEmail,
+                Category = ticket.Category,
+                Priority = ticket.Priority,
+                Status = ticket.Status,
                 CreatedTime = DateTime.Now,
                 UpdatedTime = DateTime.Now
             };

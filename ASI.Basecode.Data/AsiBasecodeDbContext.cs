@@ -21,6 +21,8 @@ namespace ASI.Basecode.Data
         public virtual DbSet<Ticket> Tickets { get; set; }
         public virtual DbSet<KnowledgeBase> KnowledgeBases { get; set; }
         public virtual DbSet<Response> Responses { get; set; }
+        public virtual DbSet<UserAccess> Access { get; set; }
+        public virtual DbSet<Role> Roles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -58,6 +60,12 @@ namespace ASI.Basecode.Data
                     .HasMaxLength(50)
                     .IsUnicode(false);
             });
+
+            modelBuilder.Entity<UserAccess>()
+                .HasOne(a => a.Role)
+                .WithMany()
+                .HasForeignKey(a => a.RoleId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             OnModelCreatingPartial(modelBuilder);
         }

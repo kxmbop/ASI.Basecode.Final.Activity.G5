@@ -11,10 +11,14 @@ namespace ASI.Basecode.Services.ServiceModels
         public int TicketId { get; set; }
         public string Subject { get; set; }
         public string SenderEmail { get; set; }
+        public string Description { get; set; }
+        public string Category {  get; set; }
+        public string Priority { get; set; }
+        public string Status { get; set; }
         public DateTime CreatedTime { get; set; }
         public DateTime UpdatedTime { get; set; }
-        public string Description { get; set; }
 
         public List<ResponseViewModel> Responses { get; set; }
+        public string Sender { get; set; }
     }
 }
