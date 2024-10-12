@@ -43,12 +43,21 @@ namespace ASI.Basecode.Data.Repositories
         public void UpdateTicket(Ticket ticket)
         {
             var existingTicket = _dbContext.Tickets.FirstOrDefault(t => t.TicketId == ticket.TicketId);
+
             if (existingTicket != null)
             {
                 existingTicket.Subject = ticket.Subject;
                 existingTicket.SenderEmail = ticket.SenderEmail;
-                _dbContext.Tickets.Update(existingTicket);
+                existingTicket.Category = ticket.Category;
+                existingTicket.Priority = ticket.Priority;
+                existingTicket.Status = ticket.Status;
+                existingTicket.UpdatedTime = ticket.UpdatedTime;
+
                 _dbContext.SaveChanges();
+            }
+            else
+            {
+                throw new Exception("Ticket not found");
             }
         }
 
@@ -59,7 +68,9 @@ namespace ASI.Basecode.Data.Repositories
 
         public Ticket GetTicketById(int id)
         {
-            return _dbContext.Tickets.Find(id); 
+            //return _dbContext.Tickets.FirstOrDefault(t => t.TicketId == id);
+            return _dbContext.Tickets.Find(id);
+
         }
     }
 }

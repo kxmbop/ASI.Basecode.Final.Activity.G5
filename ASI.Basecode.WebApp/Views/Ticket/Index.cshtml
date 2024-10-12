@@ -1,5 +1,7 @@
 ﻿@model List<ASI.Basecode.Services.ServiceModels.TicketViewModel>
-
+@section styles {
+    <link rel="stylesheet" href="~/css/ticket.css" />
+}
 <h2>Tickets</h2>
 <a asp-action="NewTicket" asp-controller="Ticket" class="btn btn-outline-primary mb-4">New Ticket</a>
 
@@ -10,12 +12,15 @@
     }
     else
     {
-        <table class="table table-bordered">
+        <table class="table table-striped table-dark">
             <thead>
                 <tr>
                     <th>Ticket ID</th>
                     <th>Subject</th>
                     <th>Sender Email</th>
+                    <th>Category</th>
+                    <th>Priority</th>
+                    <th>Status</th>
                     <th>Created Time</th>
                     <th>Updated Time</th>
                     <th>Action</th>
@@ -28,6 +33,9 @@
                         <td>@ticket.TicketId</td>
                         <td>@ticket.Subject</td>
                         <td>@ticket.SenderEmail</td>
+                        <td>@ticket.Category</td>
+                        <td>@ticket.Priority</td>
+                        <td>@ticket.Status</td>
                         <td>@ticket.CreatedTime</td>
                         <td>@ticket.UpdatedTime</td>
                         <td>
