@@ -198,30 +198,41 @@ namespace ASI.Basecode.WebApp.Controllers
             return View(model);
         }
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Index(string Category, string Priority, string Status)
         {
             var (success, tickets) = _ticketService.GetTicket();
 
-            if (success && tickets != null)
+            if (!success)
             {
-                var ticketViewModels = tickets.Select(t => new TicketViewModel
-                {
-                    TicketId = t.TicketId,
-                    Subject = t.Subject,
-                    SenderEmail = t.SenderEmail,
-                    Category = t.Category,
-                    Priority = t.Priority,
-                    Status  = t.Status,
-                    CreatedTime = t.CreatedTime,
-                    UpdatedTime = t.UpdatedTime
-                }).ToList();
+                return BadRequest();
+            }
 
-                return View(ticketViewModels);  
-            }
-            else
+            Console.WriteLine($"Category: {Category}, Priority: {Priority}, Status: {Status}");
+
+            if (!string.IsNullOrEmpty(Category) || !string.IsNullOrEmpty(Priority) || !string.IsNullOrEmpty(Status))
             {
-                return View(new List<TicketViewModel>()); 
+                tickets = tickets.Where(t => (string.IsNullOrEmpty(Category) || t.Category == Category)
+                                     && (string.IsNullOrEmpty(Priority) || t.Priority == Priority)
+                                     && (string.IsNullOrEmpty(Status) || t.Status == Status));
+
+                Console.WriteLine($"Filtered tickets: {tickets.Count()}");
             }
+
+            var model = tickets.Select(t => new TicketViewModel
+            {
+                TicketId = t.TicketId,
+                Subject = t.Subject,
+                SenderEmail = t.SenderEmail,
+                Category = t.Category,
+                Priority = t.Priority,
+                Status = t.Status,
+                CreatedTime = t.CreatedTime,
+                UpdatedTime = t.UpdatedTime
+            }).ToList();
+
+            Console.WriteLine($"Model count: {model.Count}");
+
+            return View(model);
         }
 
     }
