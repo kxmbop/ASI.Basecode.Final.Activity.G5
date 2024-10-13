@@ -1,0 +1,29 @@
+﻿@model ASI.Basecode.Data.Models.UserAccess
+
+<div class="pt-5">
+
+    <h1>Create User</h1>
+
+    <form method="post" asp-action="Create">
+        <div class="form-group">
+            <label>Firstname</label>
+            <input type="text" class="form-control" asp-for="FirstName">
+        </div>
+        <div class="form-group">
+            <label>LastName</label>
+            <input type="text" class="form-control" asp-for="LastName">
+        </div>
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" class="form-control" asp-for="Email">
+        </div>
+        <div class="form-group">
+            <label asp-for="RoleId" class="control-label">Role</label>
+            <select asp-for="RoleId" class="form-control" asp-items="ViewBag.Roles">
+                <option value="" selected disabled>Select Role</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+</div>

@@ -1,50 +1,96 @@
 ﻿@model ASI.Basecode.Services.ServiceModels.TicketViewModel
 @using static ASI.Basecode.Resources.Views.Screen
-
-<div class="container pt-5">
+@section styles {
+    <link rel="stylesheet" href="~/css/ticket.css" />
+}
+<div class="container">
     <h2>Ticket Details</h2>
-    <form asp-action="ViewTicket" method="get">
-        <div>
-            <label>Subject: </label>
-            <strong>@Model.Subject</strong>
+    <form asp-action="UpdateTicket" method="post">
+        <div class="ticket-category-priority">
+            <div class="form-group" style="width:30%;">
+                <label>Subject</label>
+                <input asp-for="Subject" class="form-control" value="@Model.Subject"/>
+                <span asp-validation-for="Subject" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="Category">Category:</label>
+                <select id="Category" name="Category" class="form-control" required>
+                    <option value="@Model.Category">@Model.Category</option>
+                    <option value="Hardware Issue">Hardware Issue</option>
+                    <option value="Software Issue">Software Issue</option>
+                    <option value="Network Issue">Network Issue</option>
+                    <option value="Account Issue">Account Issue</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="Priority">Priority:</label>
+                <select id="Priority" name="Priority" class="form-control" required>
+                    <option value="@Model.Priority">@Model.Priority</option>
+                    <option value="P1">P1 (Critical)</option>
+                    <option value="P2">P2 (High)</option>
+                    <option value="P3">P3 (Medium)</option>
+                    <option value="P4">P4 (Low)</option>
+                    <option value="P5">P5 (Very Low)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Status</label>
+                <input class="form-control" placeholder="@Model.Status" readonly />
+                <span asp-validation-for="Subject" class="text-danger"></span>
+            </div>
         </div>
-        <div>
-            <label>Customer Email: </label>
+
+        <div class="form-group">
+            <label>Customer Email</label>
             <strong>@Model.SenderEmail</strong>
         </div>
-        <h3>Responses:</h3>
-        @if (Model.Responses != null && Model.Responses.Any())
-        {
-            foreach (var response in Model.Responses)
+        <h5>Responses:</h5>
+        <div class="responses-container">
+            @if (Model.Responses != null && Model.Responses.Any())
             {
-                <div class="response-card">
-                    <p><strong>Description:</strong> @response.Description</p>
-                    <p><strong>Created Time:</strong> @response.CreatedTime.ToString("g")</p>
-                </div>
+                foreach (var response in Model.Responses)
+                {
+                    <div class="response-card">
+                        <p><strong>Response from: @response.Sender</strong></p>
+                        <p><strong>Description:</strong> @response.Description</p>
+                        <p style="margin-top:15px!important; font-size:14px;">@response.CreatedTime.ToString("g")</p>
+                    </div>
+                }
             }
-        }
-        else
-        {
-            <p>No responses available for this ticket.</p>
-        }
-    </form>
+            else
+            {
+                <p>No responses available for this ticket.</p>
+            }
 
-    <h3>Add a Response:</h3>
-    <form asp-action="AddResponse" method="post">
+        </div>
+
+        <h5>Reply</h5>
         <div class="form-group">
-            <label for="Description">Response Description:</label>
-            <textarea id="Description" name="Description" class="form-control" required></textarea>
+            <textarea id="Description" name="Description" class="form-control" placeholder="Type here..." required></textarea>
         </div>
 
         <input type="hidden" name="TicketId" value="@Model.TicketId" />
+        <input type="hidden" name="Sender" value="Customer Support" />
 
         <div class="mt-4">
-            <button type="submit" class="btn btn-primary">Submit Response</button>
-            <a href="@Url.Action("Index")" class="btn btn-secondary">Back to Tickets</a>
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Submit Ticket
+            </button>
+            <div class="dropdown-menu">
+                <form asp-action="UpdateTicket" method="post">
+                    <input type="hidden" name="TicketId" value="@Model.TicketId" />
+                    <input type="hidden" name="Sender" value="Customer Support" />
+                    <button type="submit" name="Status" value="Open" class="dropdown-item">Open</button>
+                    <button type="submit" name="Status" value="In Progress" class="dropdown-item">In Progress</button>
+                    <button type="submit" name="Status" value="Resolved" class="dropdown-item">Resolved</button>
+                    <button type="submit" name="Status" value="Closed" class="dropdown-item">Closed</button>
+                </form>
+            </div>
         </div>
     </form>
 
-    <!-- Delete Ticket Form -->
+    <!-- delete -->
     <form asp-action="DeleteTicket" method="post" class="mt-4">
         <input type="hidden" name="ticketId" value="@Model.TicketId" />
         <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this ticket?');">Delete Ticket</button>

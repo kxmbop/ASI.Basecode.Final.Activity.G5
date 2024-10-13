@@ -37,20 +37,35 @@ namespace ASI.Basecode.WebApp
             this._services.TryAddSingleton<TokenValidationParametersFactory>();
             this._services.AddScoped<IUserService, UserService>();
             this._services.AddScoped<ITicketService, TicketService>();
+            this._services.AddScoped<IKnowledgeBaseService, KnowledgeBaseService>();
             this._services.AddScoped<IResponseService>(provider =>
             {
                 var responseRepository = provider.GetService<IResponseRepository>();
-                return new ResponseService((ResponseRepository)responseRepository);
+                var ticketRepository = provider.GetService<ITicketRepository>();
+                return new ResponseService((ResponseRepository)responseRepository, (TicketRepository)ticketRepository);
             });
+
             this._services.AddScoped<IUserMService, UserMService>();
+
+            this._services.AddScoped<IRoleService, RoleService>();
+            this._services.AddScoped<IUserAccessService, UserAccessService>();
+
 
             // Repositories
             this._services.AddScoped<IUserRepository, UserRepository>();
+            this._services.AddScoped<IRoleRepository, RoleRepository>();
+            this._services.AddScoped<IUserAccessRepository, UserAccessRepository>();
             this._services.AddScoped<ITicketRepository>(provider =>
             {
                 var unitOfWork = provider.GetService<IUnitOfWork>();
                 var dbContext = provider.GetService<AsiBasecodeDBContext>();
                 return new TicketRepository(dbContext, (UnitOfWork)unitOfWork);
+            });
+            this._services.AddScoped<IKnowledgeBaseRepository>(provider =>
+            {
+                var unitOfWork = provider.GetService<IUnitOfWork>();
+                var dbContext = provider.GetService<AsiBasecodeDBContext>();
+                return new KnowledgeBaseRepository(dbContext, (UnitOfWork)unitOfWork);
             });
             this._services.AddScoped<IResponseRepository>(provider =>
             {

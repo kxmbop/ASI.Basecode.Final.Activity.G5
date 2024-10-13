@@ -1,0 +1,72 @@
+﻿@model IEnumerable<ASI.Basecode.Data.Models.Role>
+
+<style>
+        #roles {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #roles td, #roles th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #roles tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #roles tr:hover {
+            background-color: #E2F1E7;
+        }
+
+        #roles th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #387478;
+            color: white;
+        }
+</style>
+
+<div class="container pt-5">
+    <a asp-controller="Role" asp-action="Create" class="btn btn-outline-success mb-3">Add Roles</a>
+    <h1 style="margin-bottom: 20px;">List of Roles</h1>
+    <div class="row">
+        @if (Model == null || !Model.Any())
+        {
+            <h4 class="card-text font-weight-bold">no roles to display</h4>
+        }
+        else
+        {
+            <table id="roles">
+                <thead>
+                    <tr>
+                        <th>Type of Role</th>
+                        <th>Description</th>
+                        <th>Created Time</th>
+                        <th style="width: 180px;">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var roles in Model)
+                    {
+                        <tr>
+                            <td>@roles.RoleType</td>
+                            <td>@roles.Description</td>
+                            <td>@roles.CreatedTime.ToString("dd/MM/yyyy")</td>
+                            <form method="post" asp-action="Delete" class="d-flex p-2">
+                                <input value="@roles.RoleId" name="id" class="d-none" />
+                                <td style="text-align: center;">
+                                    <a asp-action="Edit" asp-route-id="@roles.RoleId" class="btn btn-primary">Edit</a>
+                                    <button type="submit" asp-action="Delete" asp class="btn btn-danger mr-2">Delete</button>
+                                </td>
+                            </form>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+
+    </div>
+</div>

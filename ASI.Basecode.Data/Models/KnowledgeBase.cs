@@ -8,16 +8,14 @@ using System.Threading.Tasks;
 
 namespace ASI.Basecode.Data.Models
 {
-    public class Ticket
+    public class KnowledgeBase
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int TicketId { get; set; }
-        public string Subject { get; set; }
-        public string Category { get; set; }
-        public string Priority { get; set; }
-        public string Status { get; set; }
-        public string SenderEmail { get; set; }
+        public int KnowledgeBaseId { get; set; }
+        public string Title { get; set; }
+        public string Creator { get; set; }
+        public string Content { get; set; }
         public DateTime CreatedTime { get; set; }
         public DateTime UpdatedTime { get; set; }
     }

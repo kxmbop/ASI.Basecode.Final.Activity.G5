@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 
 namespace ASI.Basecode.Services.ServiceModels
 {
-    public class ResponseViewModel
+    public class KnowledgeBaseViewModel
     {
-        public int ResponseId { get; set; }
-        public int TicketId { get; set; }
-        public string Sender { get; set; }
-        public string Description { get; set; }
-        public byte[] Attachment { get; set; }
+        public int KnowledgeBaseId { get; set; }
+        public string Title { get; set; }
+        public string Creator { get; set; }
+        public string Content { get; set; }
         public DateTime CreatedTime { get; set; }
         public DateTime UpdatedTime { get; set; }
     }
