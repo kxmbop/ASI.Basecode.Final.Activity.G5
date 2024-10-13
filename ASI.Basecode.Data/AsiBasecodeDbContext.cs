@@ -25,8 +25,12 @@ namespace ASI.Basecode.Data
         public virtual DbSet<KnowledgeBase> KnowledgeBases { get; set; }
 >>>>>>> 89387afed3219f92ab731ac777255bde340d1795
         public virtual DbSet<Response> Responses { get; set; }
+
+        public virtual DbSet<UserM> UserM { get; set; }
+
         public virtual DbSet<UserAccess> Access { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -1,18 +1,24 @@
 ﻿@using Microsoft.AspNetCore.Http
 @inject IHttpContextAccessor HttpContextAccessor
+
 <header class="@((ViewBag.LoginView == true) ? "hide-navbar" : "")">
     <div class="logosec hover-pointer">
         <img src="~/img/asi-logo-invert.svg"
              style="width: 185px;" alt="logo"
              onclick="window.location.href = '@Url.Action("Index", "Home")';">
     </div>
-<<<<<<< HEAD
 
     <!-- Fixed Pet link -->
     <a asp-controller="Pet" asp-action="Index" class="nav-link">Pet</a>
-=======
-        <a asp-action="Index" asp-controller="Ticket">Ticket</a>
-        <a asp-action="Index" asp-controller="KnowledgeBase">KnowledgeBase</a>
+
+    <a asp-action="Index" asp-controller="Ticket">Ticket</a>
+    <a asp-action="Index" asp-controller="KnowledgeBase">KnowledgeBase</a>
+
+    <a asp-action="Index" asp-controller="Ticket">Ticket</a>
+    <a asp-action="Index" asp-controller="UserM">User</a> 
+
+    <a asp-action="Index" asp-controller="Ticket">Ticket</a>
+    <a asp-action="Index" asp-controller="KnowledgeBase">KnowledgeBase</a>
 
     <div class="logosec hover-pointer">
         <a asp-controller="UserAccess"
@@ -29,7 +35,7 @@
             Role Management
         </a>
     </div>
->>>>>>> 89387afed3219f92ab731ac777255bde340d1795
+
 
     <div class="logosec">
         @HttpContextAccessor.HttpContext.Session.GetString("PetBreed")
