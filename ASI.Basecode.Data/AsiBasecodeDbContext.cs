@@ -21,8 +21,12 @@ namespace ASI.Basecode.Data
         public virtual DbSet<Ticket> Tickets { get; set; }
         public virtual DbSet<KnowledgeBase> KnowledgeBases { get; set; }
         public virtual DbSet<Response> Responses { get; set; }
+
+        public virtual DbSet<UserM> UserM { get; set; }
+
         public virtual DbSet<UserAccess> Access { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

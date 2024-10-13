@@ -44,8 +44,12 @@ namespace ASI.Basecode.WebApp
                 var ticketRepository = provider.GetService<ITicketRepository>();
                 return new ResponseService((ResponseRepository)responseRepository, (TicketRepository)ticketRepository);
             });
+
+            this._services.AddScoped<IUserMService, UserMService>();
+
             this._services.AddScoped<IRoleService, RoleService>();
             this._services.AddScoped<IUserAccessService, UserAccessService>();
+
 
             // Repositories
             this._services.AddScoped<IUserRepository, UserRepository>();
@@ -69,6 +73,7 @@ namespace ASI.Basecode.WebApp
                 var dbContext = provider.GetService<AsiBasecodeDBContext>();
                 return new ResponseRepository(dbContext, (UnitOfWork)unitOfWork);
             });
+            this._services.AddScoped<IUserMRepository, UserMRepository>();
 
 
             // Manager Class
