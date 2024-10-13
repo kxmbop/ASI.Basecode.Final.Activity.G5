@@ -22,6 +22,15 @@ namespace ASI.Basecode.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+<<<<<<< HEAD
+            modelBuilder.Entity("ASI.Basecode.Data.Models.Pet", b =>
+                {
+                    b.Property<int>("PetId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PetId"), 1L, 1);
+=======
             modelBuilder.Entity("ASI.Basecode.Data.Models.KnowledgeBase", b =>
                 {
                     b.Property<int>("KnowledgeBaseId")
@@ -32,22 +41,36 @@ namespace ASI.Basecode.Data.Migrations
 
                     b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
+>>>>>>> 89387afed3219f92ab731ac777255bde340d1795
 
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
 
+<<<<<<< HEAD
+                    b.Property<string>("PetBreed")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PetName")
+=======
                     b.Property<string>("Creator")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
+>>>>>>> 89387afed3219f92ab731ac777255bde340d1795
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("UpdatedTime")
                         .HasColumnType("datetime2");
 
+<<<<<<< HEAD
+                    b.HasKey("PetId");
+
+                    b.ToTable("Pets");
+=======
                     b.HasKey("KnowledgeBaseId");
 
                     b.ToTable("KnowledgeBases");
+>>>>>>> 89387afed3219f92ab731ac777255bde340d1795
                 });
 
             modelBuilder.Entity("ASI.Basecode.Data.Models.Response", b =>
@@ -67,8 +90,19 @@ namespace ASI.Basecode.Data.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+<<<<<<< HEAD
+                    b.Property<string>("PetBreed")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PetId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PetName")
+                        .HasColumnType("nvarchar(max)");
+=======
                     b.Property<int>("TicketId")
                         .HasColumnType("int");
+>>>>>>> 89387afed3219f92ab731ac777255bde340d1795
 
                     b.Property<DateTime>("UpdatedTime")
                         .HasColumnType("datetime2");
@@ -78,6 +112,8 @@ namespace ASI.Basecode.Data.Migrations
                     b.ToTable("Responses");
                 });
 
+<<<<<<< HEAD
+=======
             modelBuilder.Entity("ASI.Basecode.Data.Models.Role", b =>
                 {
                     b.Property<int>("RoleId")
@@ -133,6 +169,7 @@ namespace ASI.Basecode.Data.Migrations
                     b.ToTable("Tickets");
                 });
 
+>>>>>>> 89387afed3219f92ab731ac777255bde340d1795
             modelBuilder.Entity("ASI.Basecode.Data.Models.User", b =>
                 {
                     b.Property<int>("Id")

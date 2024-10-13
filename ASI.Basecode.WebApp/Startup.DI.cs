@@ -36,8 +36,12 @@ namespace ASI.Basecode.WebApp
             // Services
             this._services.TryAddSingleton<TokenValidationParametersFactory>();
             this._services.AddScoped<IUserService, UserService>();
+<<<<<<< HEAD
+            this._services.AddScoped<IPetService, PetService>();
+=======
             this._services.AddScoped<ITicketService, TicketService>();
             this._services.AddScoped<IKnowledgeBaseService, KnowledgeBaseService>();
+>>>>>>> 89387afed3219f92ab731ac777255bde340d1795
             this._services.AddScoped<IResponseService>(provider =>
             {
                 var responseRepository = provider.GetService<IResponseRepository>();
@@ -53,13 +57,17 @@ namespace ASI.Basecode.WebApp
 
             // Repositories
             this._services.AddScoped<IUserRepository, UserRepository>();
+<<<<<<< HEAD
+            this._services.AddScoped<IPetRepository>(provider =>
+=======
             this._services.AddScoped<IRoleRepository, RoleRepository>();
             this._services.AddScoped<IUserAccessRepository, UserAccessRepository>();
             this._services.AddScoped<ITicketRepository>(provider =>
+>>>>>>> 89387afed3219f92ab731ac777255bde340d1795
             {
                 var unitOfWork = provider.GetService<IUnitOfWork>();
                 var dbContext = provider.GetService<AsiBasecodeDBContext>();
-                return new TicketRepository(dbContext, (UnitOfWork)unitOfWork);
+                return new PetRepository(dbContext, (UnitOfWork)unitOfWork);
             });
             this._services.AddScoped<IKnowledgeBaseRepository>(provider =>
             {

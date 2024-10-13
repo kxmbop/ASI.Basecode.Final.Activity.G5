@@ -40,7 +40,7 @@ namespace ASI.Basecode.Data.Repositories
             var existingResponse = _dbContext.Responses.FirstOrDefault(r => r.ResponseId == response.ResponseId);
             if (existingResponse != null)
             {
-                existingResponse.TicketId = response.TicketId;
+                existingResponse.PetId = response.PetId;
                 existingResponse.Description = response.Description;
                 existingResponse.Attachment = response.Attachment;
                 _dbContext.Responses.Update(existingResponse);
@@ -55,7 +55,12 @@ namespace ASI.Basecode.Data.Repositories
 
         public List<Response> GetResponsesByTicketId(int ticketId)
         {
-            return _dbContext.Responses.Where(r => r.TicketId == ticketId).ToList();
+            return _dbContext.Responses.Where(r => r.PetId == ticketId).ToList();
+        }
+
+        public List<Response> GetResponsesByPetId(int petId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

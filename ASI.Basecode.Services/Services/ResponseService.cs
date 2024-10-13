@@ -45,8 +45,13 @@ namespace ASI.Basecode.Services.Services
 
             var newResponse = new Response();
             newResponse.ResponseId = response.ResponseId;
+<<<<<<< HEAD
+            //newResponse.ResponseId = System.Guid.NewGuid().ToString();
+            newResponse.PetId = response.PetId;
+=======
             newResponse.TicketId = response.TicketId;
             newResponse.Sender = response.Sender;
+>>>>>>> 89387afed3219f92ab731ac777255bde340d1795
             newResponse.Description = response.Description;
             newResponse.Attachment = response.Attachment;
             newResponse.CreatedTime = DateTime.Now;
@@ -81,8 +86,17 @@ namespace ASI.Basecode.Services.Services
 
         public List<Response> GetResponsesByTicketId(int ticketId)
         {
-            return _responseRepository.GetResponsesByTicketId(ticketId);
+            return _responseRepository.GetResponsesByPetId(ticketId);
         }
 
+        public IEnumerable<object> GetResponsesByPetId(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        List<Response> IResponseService.GetResponsesByPetId(int petId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
